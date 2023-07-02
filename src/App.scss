@@ -12,7 +12,7 @@
       @include primary700
     }
     p{
-      @include size3;
+      @include size5;
       @include secondary300
     }
 
@@ -36,7 +36,7 @@
     }
     p{
       margin-top: 13px;
-      @include size3(700);
+      @include size5(700);
       @include secondary500
     }
 
@@ -48,12 +48,12 @@
       }
 
       p{
-        @include size3(700);
+        @include size5(700);
         @include primary700
       }
 
       a{
-        @include size3;
+        @include size5;
         @include light-blue
       }
 

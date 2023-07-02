@@ -1,0 +1,58 @@
+@import "src/asset/utils/fontSize";
+@import "src/asset/utils/colors";
+
+@mixin detail-container{
+  padding: 76px 230px;
+  hr{
+    margin-top: 44px;
+  }
+  a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    p{
+      margin-left: 8px;
+      @include light-blue
+    }
+  }
+  .company-information{
+    padding-bottom: 26px;
+    h4{
+      @include size1(700);
+      margin: 0 !important;
+    }
+    p{
+      @include size3;
+    }
+    h4,p{
+      @include primary700
+    }
+  }
+  h3{
+    @include size2(700)
+  }
+
+  .schedule-container{
+    display: flex;
+    flex-direction: column;
+    background: #EEEFF2;
+    padding: 20px 44px;
+
+    .schedule{
+      display: flex;
+      align-items: center;
+      p:first-child{
+        width: 112px;
+        margin-bottom: 0!important;
+      }
+    }
+    .hour-container{
+      margin-left: 40px;
+      text-align: right;
+    }
+  }
+}
+
+.detail-container{
+  @include detail-container
+}
