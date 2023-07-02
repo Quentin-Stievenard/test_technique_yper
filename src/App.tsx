@@ -5,12 +5,16 @@ import pinIcon from './asset/icon/pin.svg';
 import Header from './components/Header/Header';
 import SearchInput from './components/SearchInput/SearchInput';
 import axios from 'axios';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { Icon } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 function App() {
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
 
   const [retails, setRetails] = useState<any[]>([]);
+  const [markers, setMarkers] = useState<any[]>([]);
 
   const config = {
     headers: {
@@ -26,7 +30,6 @@ function App() {
       .get(url, config)
       .then((response) => {
         setRetails(response.data.result);
-        console.log(response.data.result);
       })
       .catch((error) => console.log(error));
   };
@@ -34,6 +37,25 @@ function App() {
   useEffect(() => {
     console.log(lat, lng);
   }, [lat, lng]);
+
+  useEffect(() => {
+    if (retails) {
+      setMarkers(
+        retails.map((retail) => {
+          return {
+            geocode: retail.address.location.coordinates
+          };
+        })
+      );
+    }
+  }, [retails]);
+
+  const customIcon = new Icon({
+    iconUrl: require('./asset/icon/pin_map.png'),
+    iconSize: [30, 51]
+  });
+
+  console.log(markers);
 
   return (
     <>
@@ -54,13 +76,13 @@ function App() {
           </div>
           <img src={enseigneMagasin} alt="Enseigne du magasin" />
         </div>
-        <div className="home-result">
-          {retails.length <= 0 ? (
-            <div className="no-result">
-              <img src={pinIcon} alt="Icone localisation" />
-              <p>Lancez la recherche pour afficher les points de vente ici !</p>
-            </div>
-          ) : (
+        {retails.length <= 0 ? (
+          <div className="no-result">
+            <img src={pinIcon} alt="Icone localisation" />
+            <p>Lancez la recherche pour afficher les points de vente ici !</p>
+          </div>
+        ) : (
+          <div className="home-result">
             <div className="list-result">
               <h4>Résultat de la recherche :</h4>
               {retails.map((retail) => {
@@ -76,8 +98,24 @@ function App() {
               })}
               <hr />
             </div>
-          )}
-        </div>
+            <MapContainer center={[lat, lng]} zoom={11} scrollWheelZoom={false}>
+              <TileLayer
+                attribution="Google Maps"
+                url="http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}" // terrain
+                maxZoom={20}
+                subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+              />
+              {markers.map((marker, i) => {
+                return (
+                  <Marker
+                    key={i}
+                    position={[marker.geocode[1], marker.geocode[0]]}
+                    icon={customIcon}></Marker>
+                );
+              })}
+            </MapContainer>
+          </div>
+        )}
       </main>
     </>
   );

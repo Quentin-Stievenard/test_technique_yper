@@ -3,6 +3,10 @@
 
 @mixin home {
   padding: 30px 200px;
+  .leaflet-container{
+    height: 510px;
+    width: 537px;
+  }
   .home-container{
     display: flex;
     align-items: center;
@@ -25,15 +29,19 @@
       }
     }
   }
-  .home-result{
+  .no-result{
+    display: flex;
+    padding: 60px 170px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: #EEEFF2;
-    .no-result{
-      display: flex;
-      padding: 60px 170px;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+  }
+  .home-result{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     p{
       margin-top: 13px;
       @include size5(700);
@@ -42,6 +50,11 @@
 
     .list-result{
       padding:26px 30px 63px 30px;
+      background: #EEEFF2;
+      overflow-y: scroll;
+      height: calc(510px - 26px - 63px);
+      width: 510px;
+
       h4{
         @include size2(700);
         @include primary700

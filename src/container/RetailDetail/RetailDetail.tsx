@@ -54,7 +54,6 @@ export default function RetailDetail() {
     iconUrl: require('../../asset/icon/pin_map.png'),
     iconSize: [30, 51]
   });
-  console.log(retailDetail);
 
   return (
     <>
@@ -79,7 +78,7 @@ export default function RetailDetail() {
                 scrollWheelZoom={false}>
                 <TileLayer
                   attribution="Google Maps"
-                  url="http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}" // terrain
+                  url="http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}"
                   maxZoom={20}
                   subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
                 />
