@@ -3,6 +3,10 @@
 
 @mixin detail-container{
   padding: 76px 230px;
+.leaflet-container{
+  height: 311px;
+  width: 550px;
+}
   hr{
     margin-top: 44px;
   }
@@ -16,6 +20,8 @@
     }
   }
   .company-information{
+    display: flex;
+    justify-content: space-between;
     padding-bottom: 26px;
     h4{
       @include size1(700);

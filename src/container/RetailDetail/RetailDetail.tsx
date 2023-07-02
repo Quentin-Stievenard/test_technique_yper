@@ -4,12 +4,19 @@ import { useParams } from 'react-router';
 import axios from 'axios';
 import './RetailDetail.scss';
 import retourIcon from '../../asset/icon/Retour.svg';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import { Icon } from 'leaflet';
+
 type RetailDetailType = {
   name: string;
   address: {
     street: string;
     city: string;
     zip: string;
+    location: {
+      coordinates: [number, number];
+    };
   };
   delivery_hours: {
     day: number;
@@ -43,6 +50,10 @@ export default function RetailDetail() {
     return getRetailDetail();
   }, [id]);
 
+  const customIcon = new Icon({
+    iconUrl: require('../../asset/icon/pin_map.png'),
+    iconSize: [30, 51]
+  });
   console.log(retailDetail);
 
   return (
@@ -52,11 +63,33 @@ export default function RetailDetail() {
         {retailDetail ? (
           <div>
             <div className="company-information">
-              <h4>{retailDetail?.name}</h4>
-              <p>{retailDetail?.address?.street}</p>
-              <p>
-                {retailDetail?.address?.city} {retailDetail?.address?.zip}
-              </p>
+              <div>
+                <h4>{retailDetail?.name}</h4>
+                <p>{retailDetail?.address?.street}</p>
+                <p>
+                  {retailDetail?.address?.city} {retailDetail?.address?.zip}
+                </p>
+              </div>
+              <MapContainer
+                center={[
+                  retailDetail.address.location.coordinates[1],
+                  retailDetail.address.location.coordinates[0]
+                ]}
+                zoom={13}
+                scrollWheelZoom={false}>
+                <TileLayer
+                  attribution="Google Maps"
+                  url="http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}" // terrain
+                  maxZoom={20}
+                  subdomains={['mt0', 'mt1', 'mt2', 'mt3']}
+                />
+                <Marker
+                  position={[
+                    retailDetail.address.location.coordinates[1],
+                    retailDetail.address.location.coordinates[0]
+                  ]}
+                  icon={customIcon}></Marker>
+              </MapContainer>
             </div>
             <h3>Horaires d&apos;ouverture :</h3>
             <div className="schedule-container">
