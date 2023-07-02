@@ -1,0 +1,12 @@
+@mixin header{
+  box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.06);
+
+  img{
+    position: relative;
+    left: 200px;
+  }
+}
+
+.header{
+  @include header
+}

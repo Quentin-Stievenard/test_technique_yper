@@ -1,0 +1,71 @@
+@import "src/asset/utils/fontSize";
+@import "src/asset/utils/colors";
+
+@mixin home {
+  padding: 30px 200px;
+  .home-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h1{
+      @include size1(700);
+      @include primary700
+    }
+    p{
+      @include size3;
+      @include secondary300
+    }
+
+    h1,p{
+      margin-bottom: 22px;
+    }
+    @media (min-width: 1680px) {
+      img{
+        margin-left: 40px;
+      }
+    }
+  }
+  .home-result{
+    background: #EEEFF2;
+    .no-result{
+      display: flex;
+      padding: 60px 170px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    p{
+      margin-top: 13px;
+      @include size3(700);
+      @include secondary500
+    }
+
+    .list-result{
+      padding:26px 30px 63px 30px;
+      h4{
+        @include size2(700);
+        @include primary700
+      }
+
+      p{
+        @include size3(700);
+        @include primary700
+      }
+
+      a{
+        @include size3;
+        @include light-blue
+      }
+
+      .list-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.home{
+  @include home;
+}

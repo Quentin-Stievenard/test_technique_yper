@@ -1,0 +1,32 @@
+@import "src/asset/utils/fontSize";
+
+@mixin search-container {
+  display: flex;
+  align-items: center;
+  .search-input {
+    width: 59%;
+    height: 50px;
+    background: #EEEFF2;
+    border: none;
+    color: #757575;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 13px;
+  }
+
+  .search-button {
+    &:hover{
+      cursor: pointer;
+    }
+    background: #1C366B;
+    width: 33%;
+    height: 50px;
+    color: white;
+    border: none;
+    @include size4(700)
+  }
+}
+
+.search-container{
+  @include search-container
+}
