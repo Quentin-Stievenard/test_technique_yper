@@ -62,7 +62,7 @@ function App() {
       <Header />
       <main className="home">
         <div className="home-container">
-          <div className="home-left">
+          <div>
             <h1>Trouvez les points de vente proches de chez vous !</h1>
             <p>
               Renseignez votre adresse dans le champ ci-dessous, et trouvez tous nos points de vente
