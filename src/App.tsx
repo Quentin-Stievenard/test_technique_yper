@@ -55,8 +55,6 @@ function App() {
     iconSize: [30, 51]
   });
 
-  console.log(markers);
-
   return (
     <>
       <Header />
